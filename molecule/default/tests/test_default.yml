@@ -1,0 +1,22 @@
+---
+# default file for ansible-clamav
+
+package:
+  clamav:
+    installed: true
+  clamav-freshclam:
+    installed: true
+service:
+  clamav-freshclam:
+    enabled: true
+    running: true
+user:
+  clamav:
+    exists: true
+    groups:
+    - clamav
+    home: /var/lib/clamav
+    shell: /bin/false
+group:
+  clamav:
+    exists: true

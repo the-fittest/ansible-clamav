@@ -1,0 +1,20 @@
+#!/bin/bash
+
+logfile="/var/log/clamav/clamav-$(date +'%Y-%m-%d').log";
+directories_to_scan="{{ clamav_scan_directories | join(" ") }}";
+message_prefix="Warnings found on host - "
+hostname=$(hostname -f)
+
+clamscan_output=$(clamscan -ri "$directories_to_scan" --exclude=/proc --exclude=/sys --exclude=/dev);
+
+# if the value is not equal to zero, send an email with the log file attached
+if [ "$?" -ne "0" ];then
+  # Send Mail notification
+  subject=$message_prefix$hostname
+  echo $clamscan_output | mail -s "$subject" {{ clamav_mail_to }}
+fi
+
+# Write command output to logfile
+echo "$clamscan_output" >> "$logfile"
+
+exit 0

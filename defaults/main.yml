@@ -1,0 +1,17 @@
+---
+# defaults file for ansible-clamav
+
+clamav_mail_to: root
+
+clamav_scan_directories:
+  - /
+
+clamav_packages:
+  - clamav
+  - clamav-freshclam
+  - clamav-daemon
+
+clamav_additional_packages: []
+
+clamav_config_files:
+  - freshclam.conf.j2
