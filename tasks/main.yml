@@ -17,11 +17,6 @@
     group: root
     mode: 0755
 
-- name: Update Virus DB
-  command: freshclam
-  args:
-    creates: /var/lib/clamav/main.cvd
-
 - name: Configure ClamAV
   template:
     src: "{{ item }}"
@@ -33,6 +28,11 @@
     - restart clamav-freshclam
   with_items:
     - "{{ clamav_config_files }}"
+
+- name: Update Virus DB
+  command: freshclam
+  args:
+    creates: /var/lib/clamav/main.cvd
 
 - name: Start service to Update Virus DB automatically
   service:
