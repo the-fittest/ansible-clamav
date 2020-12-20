@@ -7,9 +7,19 @@ platforms:
   - name: ansible-clamav-ubuntu-18.04
     image: fittest/ubuntu-18.04:latest
     pre_build_image: true
+    command: /sbin/init
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    docker_ssl_version: SSLv23
   - name: ansible-clamav-ubuntu-20.04
     image: fittest/ubuntu-20.04:latest
     pre_build_image: true
+    command: /sbin/init
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    docker_ssl_version: SSLv23
 provisioner:
   name: ansible
   options:

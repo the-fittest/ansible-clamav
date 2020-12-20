@@ -15,7 +15,7 @@
     dest: /etc/cron.daily/clamav
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
 
 - name: Configure ClamAV
   template:
@@ -23,7 +23,7 @@
     dest: "/etc/clamav/{{ item | basename | replace('.j2', '') }}"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify:
     - restart clamav-freshclam
   with_items:
